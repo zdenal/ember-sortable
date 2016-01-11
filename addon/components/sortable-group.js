@@ -78,6 +78,14 @@ export default Component.extend({
   },
 
   /**
+    Propagate dragging event.
+    @method handleDragging
+  */
+  handleDragging(event) {
+    this.sendAction('onDragOver', event);
+  },
+
+  /**
     Update item positions.
     @method update
   */

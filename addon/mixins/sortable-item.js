@@ -343,7 +343,7 @@ export default Mixin.create({
         let scrollX = parentElement.offset().left;
         let x = elementOrigin + dx + (scrollOrigin - scrollX);
 
-        this._drag(x);
+        this._drag(x, event);
       };
     }
 
@@ -357,7 +357,7 @@ export default Mixin.create({
         let scrollY = parentElement.offset().top;
         let y = elementOrigin + dy + (scrollOrigin - scrollY);
 
-        this._drag(y);
+        this._drag(y, event);
       };
     }
   },
@@ -413,7 +413,7 @@ export default Mixin.create({
     @method _drag
     @private
   */
-  _drag(dimension) {
+  _drag(dimension, event) {
     let updateInterval = this.get('updateInterval');
     const groupDirection = this.get('group.direction');
 
@@ -424,6 +424,7 @@ export default Mixin.create({
       this.set('y', dimension);
     }
 
+    this._tellGroup('handleDragging', event);
     run.throttle(this, '_tellGroup', 'update', updateInterval);
   },
 
